@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+  <title>Website blocked</title>
+  <style type="text/css">
+    html{min-height:100%;position:relative}
+    html,body{background-color:#ECEFF1;color:black;min-width:100%;min-height:100%;margin:0;padding:0;font-family:Segoe UI}
+    .middle{text-align:left;font-size:35px;width:80%;margin:auto;margin-bottom:280px}
+    #icon{fill:#D03737}
+    .icon{vertical-align:middle;filter:drop-shadow(3px 5px 5px rgba(0,0,0,0.161))}
+    .backgroundicon{display:none}
+    header{white-space:nowrap;font-size:60px;background-color:white;border-bottom:#D03737 solid 2px;filter:drop-shadow(0 5px 20px rgba(0,0,0,0.161))}
+    header h3{font-size:50px}
+    header h4{font-size:25px}
+    header svg{height:90px;float:left;margin-right:50px}
+    footer{font-size:35px;position:absolute;bottom:0;background-color:white;width:100%;height:210px;padding-bottom:20px;padding-top:20px;border-top:#D03737 solid 2px;filter:drop-shadow(0 5px 20px rgba(0,0,0,0.161))}
+    footer span{font-size:19px}
+    footer p{font-size:17px}
+    h1,h2,h3,h4,h5,h6{font-weight:normal;margin:0}
+    h5{font-size:20px}
+    p{margin:0}
+    .why{font-size:25px;margin-top:30px}
+    .reasons{font-size:20px;margin:0}
+    dt{margin-left:10px}
+    a,a:visited{color:inherit}
+    @media only screen and (max-width:1360px){header h3{font-size:40px}}
+    @media only screen and (max-width:1100px){.icon{height:80px;display:block;margin:auto;padding-top:5px;float:none}header h3{font-size:30px}header h4{font-size:20px}.why{font-size:20px}.reasons{font-size:17px}footer span{font-size:18px}footer p{font-size:17px}}
+    @media only screen and (max-width:860px){.middle{margin-bottom:350px}footer{height:290px;padding-bottom:20px}}
+    @media only screen and (max-width:720px){header{word-break:break-word;white-space:normal}header h3{font-size:25px;display:block}header h4{font-size:18px}.icon{display:none}.backgroundicon{display:block;position:fixed;height:100%;width:100%;filter:opacity(0.1);left:50%;top:50%;transform:translate(-50%,-50%)}}
+    @media only screen and (max-width:550px){.middle{margin-bottom:380px}footer{height:310px}}
+    @media only screen and (max-width:500px){.middle{margin-bottom:450px}footer{height:380px}}
+    @media only screen and (max-width:400px){.middle{margin-bottom:600px}footer{height:530px}}
+  </style>
+  <script type="text/javascript">
+    var hour = new Date().getHours();
+    // Automatically switch to dark style if system time is between 7PM-7AM
+    if(hour >= 19 || hour <= 7) {
+      var head = document.head;
+      var style = document.createElement("style");
+      style.type = "text/css";
+      style.rel = "stylesheet";
+      style.innerHTML = 'html,body{background-color:#232D33;color:white}header,footer{background-color:#263238}';
+      head.appendChild(style);
+    }
+  </script>
+</head>
+<body>
+  <header>
+    <div style="margin: auto;width: 70%;padding: 20px;">
+      <svg class="icon" viewBox="0 0 188.074 188.074">
+        <path id="icon" d="M270.7,94.471l-12.224,12.223L227.426,75.649l-31.045,31.045L184.157,94.471,215.2,63.426,184.157,32.381l12.224-12.223L227.426,51.2l31.045-31.045L270.7,32.381,239.649,63.426ZM227.426-23.111a86.537,86.537,0,1,0,86.537,86.537,86.513,86.513,0,0,0-86.537-86.537Z" transform="translate(-136.39 25.61)"/>
+      </svg>
+      <h3>Website blocked by Network Security for pfSense®</h3>
+      <h4>You are unable to access {URL}</h4>
+    </div>
+  </header>
+  <div class="middle">
+    <svg class="backgroundicon" viewBox="0 0 188.074 188.074">
+      <path id="icon" d="M270.7,94.471l-12.224,12.223L227.426,75.649l-31.045,31.045L184.157,94.471,215.2,63.426,184.157,32.381l12.224-12.223L227.426,51.2l31.045-31.045L270.7,32.381,239.649,63.426ZM227.426-23.111a86.537,86.537,0,1,0,86.537,86.537,86.513,86.513,0,0,0-86.537-86.537Z" transform="translate(-136.39 25.61)"/>
+    </svg>
+    <p class="why">A few reasons why this website may have been blocked</p>
+    <dl class="reasons">
+      <dt>Inappropriate(Adult rated, hateful or questionable content)</dt>
+      <dd>- Contains content that is considered adult rated, hateful or questionable</dd>
+      <dt>Illegal</dt>
+      <dd>- Contains context that is considered illegal or has been blocked by law</dd>
+      <dt>Malicious(Viruses, malware, harmful or unwanted programs)</dt>
+      <dd>- An attacker might attempt to install dangerous programs on to your device that steal or delete your information</dd>
+      <dd>- An attacker might harm your browsing experience such as by changing your homepage or showing extra ads on sites you visit</dd>
+      <dt>Phishing attack</dt>
+      <dd>- May try to trick you in to revealing your personal information such as passwords, phone numbers, credit cards, banking details or account numbers</dd><dd>
+      </dd><dd>- Fake tech support/scam: A website designed to look legitimate claiming to be a company(for example, Microsoft, Google, Apple, BT) but is actually fake and will try to get your personal information such as your banking/credit card details and scam you</dd>
+      <dt>Advertisements</dt>
+      <dd>- Google, Yahoo, Bing, and other websites could be sending you ads to a website designed to look legitimate but is actually a website spreading malware. Since it's hard to tell whether ads are legitimate or not, and ads are of limited benefit (nothing stops you from going directly to the site via its web address), we categorically block them.</dd>
+      <dt>Gambling</dt>
+    </dl>
+  </div>
+  <footer>
+    <div style="width: 80%; margin: auto;">
+      <h5>Please inform your local network operator if you believe this block is incorrect</h5>
+      <span>Technical information</span>
+      <p>
+        - URL: {FULL_URL}<br>
+        - URL IP: {URL_IP}<br>
+        - Reason: {REASON}<br>
+        - Block ID: {BLOCK_ID} at {DATE} for {REQUEST_IP}<br>
+        Powered by Network Security for <a target="_blank" href="https://www.pfsense.org/">pfSense</a>®, pfSense is developed and maintained by Netgate. © ESF 2004 - 2019, Squid Proxy server running on "192.168.1.1"<br>
+      </p>
+    </div>
+  </footer>
+</body>
+</html>
