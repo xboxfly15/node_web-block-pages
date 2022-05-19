@@ -1,10 +1,10 @@
-'use strict'
-const express = require('express')
 const dns = require('dns')
 const fs = require('fs')
+const path = require('path')
 const uuid = require('uuid')
 const escape = require('escape-html')
-const Transform = require('stream').Transform
+const { Transform } = require('stream')
+const htmlFiles = 'public_html'
 const reasons = {
   UNKNOWN: 'UNKNOWN',
   ADVERTISEMENTS: 'ADVERTISEMENTS',
@@ -30,22 +30,12 @@ webserver(8568, reasons.PHISHING)
 
 function webserver(port, reason) {
   const path = getPath(reason)
-  const app = express();
-  app.disable('x-powered-by')
-  app.disable('etag')
+  const app = require('express')()
 
-  app.use(function(req, res, next) {
-    res.ip = (req.headers['x-forwarded-for'] || req.connection.remoteAddress).split(':').pop()
-    res.ip = res.ip == '::1' ? 'privateIp' : res.ip
-    res.ua = req.headers['user-agent']
-    res.lang = req.headers['accept-language']
-    res.referer = req.headers['referer']
-    res.method = req.method
-    res.host = req.get('host').split(':').shift();
-    res.fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl
+  app.use((req, res, next) => {
     res.setHeader('Content-Type', 'text/html')
     return next()
-  });
+  })
 
   app.get(['/', '/*', '*'], (req, res) => {
     getIPFromURL(res.host).then(urlip => {
@@ -53,23 +43,23 @@ function webserver(port, reason) {
       const blockid = uuid.v4()
       const current = new Date()
       parser._transform = function(data, encoding, done) {
-        var str = data.toString()
-        str = str.replace('{URL}', res.host)
-        str = str.replace('{FULL_URL}', escape(res.fullUrl))
+        let str = data.toString()
+        str = str.replace('{URL}', req.get('Host'))
+        str = str.replace('{FULL_URL}', escape(req.protocol + '://' + req.get('host') + req.originalUrl))
         str = str.replace('{URL_IP}', urlip)
         str = str.replace('{BLOCK_ID}', blockid)
         str = str.replace('{DATE}', current.toLocaleString())
-        str = str.replace('{REQUEST_IP}', res.ip)
+        str = str.replace('{REQUEST_IP}', req.connection.remoteAddress)
         str = str.replace('{REASON}', reason)
-        str = str.replace('{USER_AGENT}', escape(res.ua))
-        str = str.replace('{METHOD}', res.method)
-        str = str.replace('{REFERER}', res.referer === undefined ? 'Unknown' : escape(res.referer))
+        str = str.replace('{USER_AGENT}', escape(req.headers['user-agent']))
+        str = str.replace('{METHOD}', req.method)
+        str = str.replace('{REFERER}', req.referer === undefined ? 'Unknown' : escape(req.referer))
         this.push(str)
         done()
       }
       res.status(451)
       const rs = fs.createReadStream(path)
-      rs.on('error', err => {res.send();console.error(err)})
+      rs.on('error', err => { res.send(); console.error(err) })
       rs.pipe(parser).pipe(res)
       console.log('New request {' +
         '\n   Date: ' + current +
@@ -82,24 +72,23 @@ function webserver(port, reason) {
         '\n   URL IP: ' + urlip +
         '\n   Block ID: ' + blockid +
         '\n}'
-        )
+      )
     }).catch(err => console.error(err))
   })
   app.listen(port, () => console.log('Webserver listening at port %s with path %s', port, path))
 }
 
 function getPath(reason) {
-  const html = __dirname + '/public_html/'
-  switch(reason) {
-    case reasons.UNKNOWN:         return html+'unknown.html'
-    case reasons.ADVERTISEMENTS:  return html+'advertisements.html'
-    case reasons.BETTING:         return html+'betting.html'
-    case reasons.VPNORPROXY:      return html+'vpnorproxy.html'
-    case reasons.INAPPROPRATE:    return html+'inapproprate.html'
-    case reasons.ILLEGAL:         return html+'illegal.html'
-    case reasons.MALICIOUS:       return html+'malicious.html'
-    case reasons.MALWARE:         return html+'malware.html'
-    case reasons.PHISHING:        return html+'phishing.html'
+  switch (reason) {
+    case reasons.UNKNOWN: return path.join(htmlFiles, 'unknown.html')
+    case reasons.ADVERTISEMENTS: return path.join(htmlFiles, 'advertisements.html')
+    case reasons.BETTING: return path.join(htmlFiles, 'betting.html')
+    case reasons.VPNORPROXY: return path.join(htmlFiles, 'vpnorproxy.html')
+    case reasons.INAPPROPRATE: return path.join(htmlFiles, 'inapproprate.html')
+    case reasons.ILLEGAL: return path.join(htmlFiles, 'illegal.html')
+    case reasons.MALICIOUS: return path.join(htmlFiles, 'malicious.html')
+    case reasons.MALWARE: return path.join(htmlFiles, 'malware.html')
+    case reasons.PHISHING: return path.join(htmlFiles, 'phishing.html')
     default: throw new Error('Reason is not defined')
   }
 }
@@ -107,7 +96,7 @@ function getPath(reason) {
 function getIPFromURL(url) {
   return new Promise((resolve, reject) => {
     dns.lookup(url, function(err, result) {
-      if(err) throw reject(err);
+      if (err) throw reject(err)
       resolve(result)
     })
   })

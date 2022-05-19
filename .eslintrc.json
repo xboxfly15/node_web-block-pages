@@ -1,0 +1,42 @@
+{
+  "env": {
+    "es2020": true,
+    "node": true
+  },
+  "extends": [
+    "standard"
+  ],
+  "parserOptions": {
+    "ecmaVersion": 11
+  },
+  "rules": {
+    "strict": [
+      "error",
+      "global"
+    ],
+    "import/extensions": [
+      "error",
+      "ignorePackages"
+    ],
+    "node/no-callback-literal": "off",
+    "space-before-function-paren": [
+      "error",
+      {
+        "anonymous": "never",
+        "named": "never",
+        "asyncArrow": "always"
+      }
+    ],
+    "object-shorthand": [
+      "error",
+      "always"
+    ],
+    "prefer-destructuring": [
+      "error",
+      {
+        "object": true,
+        "array": true
+      }
+    ]
+  }
+}
