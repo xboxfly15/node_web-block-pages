@@ -1,7 +1,7 @@
 const dns = require('dns')
 const fs = require('fs')
 const path = require('path')
-const uuid = require('uuid')
+const crypto = require('crypto')
 const escape = require('escape-html')
 const { Transform } = require('stream')
 const htmlFiles = 'public_html'
@@ -40,7 +40,7 @@ function webserver(port, reason) {
   app.get(['/', '/*', '*'], (req, res) => {
     getIPFromURL(res.host).then(urlip => {
       const parser = new Transform()
-      const blockid = uuid.v4()
+      const blockid = crypto.randomUUID()
       const current = new Date()
       parser._transform = function(data, encoding, done) {
         let str = data.toString()
