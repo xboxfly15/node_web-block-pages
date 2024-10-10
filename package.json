@@ -19,7 +19,7 @@
   "homepage": "https://github.com/xboxfly15/node_web-block-pages#readme",
   "dependencies": {
     "escape-html": "^1.0.3",
-    "express": "^4.19.2"
+    "express": "^4.21.1"
   },
   "devDependencies": {
     "standardx": "^7.0.0"
